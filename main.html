@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calendar</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+        .day { border: 1px solid #ccc; padding: 20px; min-height: 50px; }
+        .day:hover { background: #f0f0f0; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Simple Calendar</h1>
+    <div class="calendar" id="calendar"></div>
+    
+    <script>
+        function generateCalendar() {
+            const calendar = document.getElementById("calendar");
+            const daysInMonth = new Date(2025, 2, 0).getDate(); // February 2025
+            for (let i = 1; i <= daysInMonth; i++) {
+                let day = document.createElement("div");
+                day.className = "day";
+                day.textContent = i;
+                day.onclick = () => addEvent(i);
+                calendar.appendChild(day);
+            }
+        }
+        
+        function addEvent(day) {
+            let event = prompt("Enter event for " + day);
+            if (event) {
+                localStorage.setItem("event-" + day, event);
+                alert("Event saved!");
+            }
+        }
+        
+        generateCalendar();
+    </script>
+</body>
+</html>
